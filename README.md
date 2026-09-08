@@ -36,11 +36,12 @@ until an administrator enables it.
 
 ## Local preview
 
-The native PHP template preview renders the actual login and footer templates
-with the default Ceasar configuration. Run it from the repository root on a
-machine with PHP:
+The native PHP template preview renders the actual header, login, footer, and
+generated theme assets with the default Ceasar configuration. Run it from the
+repository root on a machine with Node.js and PHP:
 
 ```bash
+npm run build
 php -S 127.0.0.1:8099 -t . tools/branding-preview.php
 ```
 
