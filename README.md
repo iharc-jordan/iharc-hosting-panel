@@ -1,10 +1,12 @@
-<h1 align="center"><a href="https://www.hestiacp.com/">Hestia Control Panel</a></h1>
+<h1 align="center">Ceasar Control Panel</h1>
 
-![HestiaCP Web Interface screenshot](https://storage.hestiacp.com/hestiascreen.png)
+<p align="center">IHARC Labs white-label distribution based on the upstream Hestia Control Panel project.</p>
+
+![Upstream Hestia Control Panel web interface reference](https://storage.hestiacp.com/hestiascreen.png)
 
 <h2 align="center">Lightweight and powerful control panel for the modern web</h2>
 
-<p align="center"><strong>Latest stable release:</strong> Version 1.10.4 | <a href="https://github.com/hestiacp/hestiacp/blob/release/CHANGELOG.md">View Changelog</a></p>
+<p align="center"><strong>Latest stable release:</strong> Ceasar Control Panel 1.10.4 (upstream Hestia 1.10.4) | <a href="https://github.com/hestiacp/hestiacp/blob/release/CHANGELOG.md">View Changelog</a></p>
 
 <p align="center">
 	<a href="https://www.hestiacp.com/">HestiaCP.com</a> |
@@ -20,6 +22,8 @@
 </p>
 
 ## **Welcome!**
+
+Ceasar Control Panel is the IHARC Labs white-label distribution of the upstream Hestia Control Panel project. It keeps the upstream command and filesystem compatibility needed for maintained updates while exposing server-owned branding controls.
 
 Hestia Control Panel is designed to provide administrators an easy to use web and command line interface, enabling them to quickly deploy and manage web domains, mail accounts, DNS zones, and databases from one central dashboard without the hassle of manually deploying and configuring individual components or services.
 

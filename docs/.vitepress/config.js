@@ -3,7 +3,7 @@ import { version } from '../../package.json';
 
 export default defineConfig({
 	lang: 'en-US',
-	title: 'Hestia Control Panel',
+	title: 'Ceasar Control Panel',
 	description: 'Open-source web server control panel.',
 
 	lastUpdated: true,
@@ -39,7 +39,7 @@ export default defineConfig({
 
 		footer: {
 			message: 'Released under the GPLv3 License.',
-			copyright: 'Copyright © 2019-present Hestia Control Panel',
+			copyright: 'Ceasar Control Panel, based on Hestia Control Panel (GPLv3)',
 		},
 
 		algolia: {

@@ -18,6 +18,25 @@ The baseline was selected from the IHARC Labs deployment and proof records.
 It is a source pin and inventory reference, not evidence that this checkout
 has been installed, migrated, or deployed.
 
+## Ceasar Control Panel branding
+
+The default customer-facing identity is **Ceasar Control Panel**. It is
+server-owned through Hestia's existing system configuration and white-label
+hooks:
+
+- New or repaired installations use `APP_NAME=Ceasar Control Panel` from
+  `func/syshealth.sh`; `TITLE` continues to support the native `{{appname}}`
+  variable.
+- An administrator can change the name, title, email sender, documentation
+  visibility, and logo through the native **Server -> White Label** page or the
+  `v-change-sys-config-value` / `v-update-white-label-logo` commands.
+- Customer-facing templates read the configured `APP_NAME`; Hestia paths,
+  command names, API identifiers, package names, and upstream legal notices
+  remain stable for compatibility and attribution.
+
+The checked-in logo files are the Ceasar default assets. Server owners can
+replace them through the existing `web/images/custom/` white-label flow.
+
 ## Ownership boundary
 
 This repository owns the Hestia panel source, Hestia-native command/template
