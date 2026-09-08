@@ -23,7 +23,12 @@ if ($webRoot !== false && $requestPath !== '/' && $requestPath !== '') {
     if ($asset !== false && is_file($asset) && str_starts_with($asset, $webRoot . DIRECTORY_SEPARATOR)) {
         $extension = strtolower(pathinfo($asset, PATHINFO_EXTENSION));
         if ($extension !== 'php') {
-            $mime = mime_content_type($asset) ?: 'application/octet-stream';
+            $mime = match ($extension) {
+                'css' => 'text/css',
+                'js' => 'application/javascript',
+                'svg' => 'image/svg+xml',
+                default => mime_content_type($asset) ?: 'application/octet-stream',
+            };
             header('Content-Type: ' . $mime);
             readfile($asset);
             return true;
@@ -85,7 +90,6 @@ function renderNativeLogin(string $appName, string $repositoryRoot): string
     ob_start();
     require $repositoryRoot . '/web/templates/header.php';
     require $repositoryRoot . '/web/templates/pages/login/login.php';
-    require $repositoryRoot . '/web/templates/includes/app-footer.php';
     require $repositoryRoot . '/web/templates/includes/login-footer.php';
     return (string) ob_get_clean();
 }
