@@ -1,10 +1,8 @@
 import { defineConfig } from 'vitepress';
-import { version } from '../../package.json';
-
 export default defineConfig({
 	lang: 'en-US',
 	title: 'Ceasar Control Panel',
-	description: 'Open-source web server control panel.',
+	description: 'IHARC Labs maintained white-label hosting control panel source.',
 
 	lastUpdated: true,
 	cleanUrls: false,
@@ -23,9 +21,7 @@ export default defineConfig({
 		nav: nav(),
 
 		socialLinks: [
-			{ icon: 'github', link: 'https://github.com/hestiacp/hestiacp' },
-			{ icon: 'twitter', link: 'https://twitter.com/HestiaPanel' },
-			{ icon: 'facebook', link: 'https://www.facebook.com/hestiacp' },
+			{ icon: 'github', link: 'https://github.com/iharc-jordan/ceasar-control-panel' },
 		],
 
 		sidebar: { '/docs/': sidebarDocs() },
@@ -33,13 +29,13 @@ export default defineConfig({
 		outline: [2, 3],
 
 		editLink: {
-			pattern: 'https://github.com/hestiacp/hestiacp/edit/main/docs/:path',
+			pattern: 'https://github.com/iharc-jordan/ceasar-control-panel/edit/main/docs/:path',
 			text: 'Edit this page on GitHub',
 		},
 
 		footer: {
 			message: 'Released under the GPLv3 License.',
-			copyright: 'Ceasar Control Panel, based on Hestia Control Panel (GPLv3)',
+			copyright: 'Ceasar Control Panel is an IHARC Labs maintained distribution',
 		},
 
 		algolia: {
@@ -57,26 +53,6 @@ function nav() {
 		{ text: 'Install', link: '/install' },
 		{ text: 'Documentation', link: '/docs/introduction/getting-started', activeMatch: '/docs/' },
 		{ text: 'Team', link: '/team' },
-		{ text: 'Demo', link: 'https://demo.hestiacp.com:8083/' },
-		{ text: 'Forum', link: 'https://forum.hestiacp.com/' },
-		{ text: 'Donate', link: '/donate' },
-		{
-			text: `v${version}`,
-			items: [
-				{
-					text: 'Changelog',
-					link: 'https://github.com/hestiacp/hestiacp/blob/main/CHANGELOG.md',
-				},
-				{
-					text: 'Contributing',
-					link: 'https://github.com/hestiacp/hestiacp/blob/main/CONTRIBUTING.md',
-				},
-				{
-					text: 'Security policy',
-					link: 'https://github.com/hestiacp/hestiacp/blob/main/SECURITY.md',
-				},
-			],
-		},
 	];
 }
 /** @returns {import("vitepress").DefaultTheme.SidebarItem[]} */
@@ -137,18 +113,6 @@ function sidebarDocs() {
 				{ text: 'Quick install app', link: '/docs/contributing/quick-install-app' },
 				{ text: 'Testing', link: '/docs/contributing/testing' },
 				{ text: 'Translations', link: '/docs/contributing/translations' },
-			],
-		},
-		{
-			text: 'Community',
-			collapsed: false,
-			items: [
-				{ text: 'Hestia Nginx Cache', link: '/docs/community/hestia-nginx-cache' },
-				{
-					text: 'Ioncube installer for Hestia',
-					link: '/docs/community/ioncube-hestia-installer',
-				},
-				{ text: 'Install script generator', link: '/docs/community/install-script-generator' },
 			],
 		},
 		{

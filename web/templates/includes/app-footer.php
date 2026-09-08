@@ -1,9 +1,9 @@
 <footer class="app-footer">
 	<div class="container">
 		<p>
-			<a href="https://hestiacp.com/" class="app-footer-link" target="_blank" rel="noopener noreferrer">
+			<span class="app-footer-link">
 				<?= tohtml($_SESSION["APP_NAME"]) ?>
-			</a>
+			</span>
 			v<?= $_SESSION["VERSION"] ?>
 		</p>
 	</div>

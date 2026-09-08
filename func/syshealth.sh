@@ -523,8 +523,8 @@ function syshealth_repair_system_config() {
 	fi
 
 	if [[ -z $(check_key_exists 'HIDE_DOCS') ]]; then
-		echo "[ ! ] Adding missing variable to hestia.conf: HIDE_DOCS ('no')"
-		$BIN/v-change-sys-config-value "HIDE_DOCS" "no"
+		echo "[ ! ] Adding missing variable to hestia.conf: HIDE_DOCS ('yes')"
+		$BIN/v-change-sys-config-value "HIDE_DOCS" "yes"
 	fi
 
 	if [[ -z $(check_key_exists 'POLICY_SYNC_ERROR_DOCUMENTS') ]]; then

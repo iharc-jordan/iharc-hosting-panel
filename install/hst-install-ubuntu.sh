@@ -116,7 +116,7 @@ help() {
   -f, --force             Force installation
   -h, --help              Print this help
 
-  Example: bash $0 -e demo@hestiacp.com -p p4ssw0rd --multiphp yes"
+  Example: bash $0 -e demo@example.com -p p4ssw0rd --multiphp yes"
 	exit 1
 }
 
@@ -589,7 +589,6 @@ case $architecture in
 		echo -e "\e[33mERROR: $architecture is currently not supported!\e[0m"
 		echo -e "\e[33mPlease verify the achitecture used is currenlty supported\e[0m"
 		echo ""
-		echo -e "\e[33mhttps://github.com/hestiacp/hestiacp/blob/main/README.md\e[0m"
 		echo ""
 		check_result 1 "Installation aborted"
 		;;
@@ -621,7 +620,6 @@ install_welcome_message() {
 		echo "                          USE AT YOUR OWN RISK                      "
 	fi
 	echo "                                  ${DISPLAY_VER}                        "
-	echo "                            www.hestiacp.com                            "
 	echo
 	echo "========================================================================"
 	echo
@@ -1375,6 +1373,7 @@ write_config_value "BACKEND_PORT" "8083"
 
 # Customer-facing default; administrators can override it through White Label.
 write_config_value "APP_NAME" "Ceasar Control Panel"
+write_config_value "HIDE_DOCS" "yes"
 
 # Web stack
 if [ "$apache" = 'yes' ]; then
@@ -2548,18 +2547,10 @@ echo -e -n " 	Username:   $username
 Thank you for choosing Ceasar Control Panel to power your full stack web server,
 we hope that you enjoy using it as much as we do!
 
-Please feel free to contact us at any time if you have any questions,
-or if you encounter any bugs or problems:
-
-Documentation:  https://docs.hestiacp.com/
-Forum:          https://forum.hestiacp.com/
-GitHub:         https://www.github.com/hestiacp/hestiacp
+Use the server-owned White Label settings to configure the panel identity.
 
 Note: Automatic updates are enabled by default. If you would like to disable them,
 please log in and navigate to Server > Updates to turn them off.
-
-Help support the Ceasar Control Panel project by donating via PayPal:
-https://www.hestiacp.com/donate
 
 --
 Sincerely yours,
@@ -2577,7 +2568,7 @@ cat $tmpfile
 rm -f $tmpfile
 
 # Add welcome message to notification panel
-$HESTIA/bin/v-add-user-notification "$username" 'Welcome to Ceasar Control Panel!' '<p>You are now ready to begin adding <a href="/add/user/">user accounts</a> and <a href="/add/web/">domains</a>. For help and assistance, <a href="https://hestiacp.com/docs/" target="_blank">view the documentation</a> or <a href="https://forum.hestiacp.com/" target="_blank">visit our forum</a>.</p><p>Please <a href="https://github.com/hestiacp/hestiacp/issues" target="_blank">report any issues via GitHub</a>.</p><p class="u-text-bold">Have a wonderful day!</p><p><i class="fas fa-heart icon-red"></i> The Ceasar Control Panel development team</p>'
+$HESTIA/bin/v-add-user-notification "$username" 'Welcome to Ceasar Control Panel!' '<p>You are now ready to begin adding <a href="/add/user/">user accounts</a> and <a href="/add/web/">domains</a>.</p><p class="u-text-bold">Have a wonderful day!</p><p><i class="fas fa-heart icon-red"></i> The Ceasar Control Panel development team</p>'
 
 # Clean-up
 # Sort final configuration file

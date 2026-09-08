@@ -45,12 +45,6 @@
 - [Testing](/docs/contributing/testing)
 - [Translations](/docs/contributing/translations)
 
-## Community
-
-- [Hestia Nginx Cache](/docs/community/hestia-nginx-cache)
-- [Ioncube installer for Hestia](/docs/community/ioncube-hestia-installer)
-- [Install script generator](/docs/community/install-script-generator)
-
 ## Reference
 
 - [API](/docs/reference/api)

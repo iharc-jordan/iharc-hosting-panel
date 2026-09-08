@@ -4,34 +4,12 @@ layout: page
 title: The Team
 ---
 
-<script setup>
-  import { VPTeamPage, VPTeamPageTitle, VPTeamPageSection, VPTeamMembers } from "vitepress/theme";
-  import { projectManagers, teamMembers } from "./_data/team";
-</script>
+# Maintainers
 
-<VPTeamPage>
-  <VPTeamPageTitle>
-    <template #title>The Team</template>
-    <template #lead>
-      The development of Hestia is guided by an international team, some of whom have chosen to be featured below.
-    </template>
-  </VPTeamPageTitle>
-  <VPTeamPageSection>
-    <template #title>Project Managers</template>
-    <template #members>
-      <VPTeamMembers :members="projectManagers" />
-    </template>
-  </VPTeamPageSection>
-  <VPTeamPageSection>
-    <template #title>Team Members</template>
-    <template #members>
-      <VPTeamMembers :members="teamMembers" />
-    </template>
-  </VPTeamPageSection>
-  <!-- <VPTeamPageSection>
-    <template #title>Contributors ❤️</template>
-    <template #members>
-      <VPTeamMembers size="small" :members="featuredContributors" />
-    </template>
-  </VPTeamPageSection> -->
-</VPTeamPage>
+Ceasar Control Panel is an IHARC Labs maintained white-label source checkout.
+Repository maintenance is owned by `iharc-jordan`; the separate IHARC Labs
+repository owns the portal, authentication, database, provider adapters, and
+deployment state.
+
+Upstream attribution and the source contributors remain recorded in the
+repository history and [upstream notices](https://github.com/iharc-jordan/ceasar-control-panel/blob/main/UPSTREAM_NOTICES.md).

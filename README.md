@@ -1,142 +1,64 @@
-<h1 align="center">Ceasar Control Panel</h1>
+# Ceasar Control Panel
 
-<p align="center">IHARC Labs white-label distribution based on the upstream Hestia Control Panel project.</p>
+Ceasar Control Panel is the IHARC Labs maintained white-label checkout for a
+hosting control panel. It preserves the upstream Hestia Control Panel source,
+filesystem layout, commands, and APIs so that upstream security and maintenance
+work can be reviewed against a pinned source baseline.
 
-![Upstream Hestia Control Panel web interface reference](https://storage.hestiacp.com/hestiascreen.png)
+This repository is a maintained source checkout and customization boundary. It
+does not claim a published Ceasar release, a hosted deployment, a public demo,
+a support forum, or a donation program.
 
-<h2 align="center">Lightweight and powerful control panel for the modern web</h2>
+## Source status
 
-<p align="center"><strong>Latest stable release:</strong> Ceasar Control Panel 1.10.4 (upstream Hestia 1.10.4) | <a href="https://github.com/hestiacp/hestiacp/blob/release/CHANGELOG.md">View Changelog</a></p>
+- Upstream project: <https://github.com/hestiacp/hestiacp.git>
+- Baseline tag: `1.10.4`
+- Baseline commit: `733dd4453ae358b587d61b3f2faedf6e24c4db51`
+- Current checkout: native white-label changes are kept in separate IHARC
+  commits on top of that source baseline.
+- The repository is not evidence that a panel has been installed, deployed, or
+  accepted for production.
 
-<p align="center">
-	<a href="https://www.hestiacp.com/">HestiaCP.com</a> |
-	<a href="https://docs.hestiacp.com/">Documentation</a> |
-	<a href="https://forum.hestiacp.com/">Forum</a>
-	<br/><br/>
-	<a href="https://github.com/hestiacp/hestiacp/actions/workflows/lint.yml">
-		<img src="https://github.com/hestiacp/hestiacp/actions/workflows/lint.yml/badge.svg" alt="Lint Status"/>
-	</a>
-	<a href="https://gurubase.io/g/hestia">
-		<img src="https://img.shields.io/badge/Gurubase-Ask%20Hestia%20Guru-006BFF" alt="Gurubase"/>
-	</a>
-</p>
+## Server-owned branding
 
-## **Welcome!**
+Fresh installs default to **Ceasar Control Panel** through `APP_NAME`. An
+administrator can change the name, title, sender details, documentation
+visibility, and logo from the native **Server -> White Label** page. The
+corresponding native commands are `v-change-sys-config-value` and
+`v-update-white-label-logo`.
 
-Ceasar Control Panel is the IHARC Labs white-label distribution of the upstream Hestia Control Panel project. It keeps the upstream command and filesystem compatibility needed for maintained updates while exposing server-owned branding controls.
+The default logo and favicon are text-first Ceasar assets. A server owner can
+replace them through the existing `web/images/custom/` white-label flow.
+The native source exposes `HIDE_DOCS` as the documentation visibility control;
+it does not expose a configurable Ceasar support URL. It defaults to `yes` for
+a white-label install, so the upstream documentation entry point is hidden
+until an administrator enables it.
 
-Hestia Control Panel is designed to provide administrators an easy to use web and command line interface, enabling them to quickly deploy and manage web domains, mail accounts, DNS zones, and databases from one central dashboard without the hassle of manually deploying and configuring individual components or services.
+## Local preview
 
-## Donate
-
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ST87LQH2CHGLA)<br /><br />
-Bitcoin : bc1q48jt5wg5jaj8g9zy7c3j03cv57j2m2u5anlutu<br>
-Ethereum : 0xfF3Dd2c889bd0Ff73d8085B84A314FC7c88e5D51<br>
-Binance: bnb1l4ywvw5ejfmsgjdcx8jn5lxj7zsun8ktfu7rh8<br>
-Smart Chain: 0xfF3Dd2c889bd0Ff73d8085B84A314FC7c88e5D51<br>
-
-## Features and Services
-
-- Apache2 and NGINX with PHP-FPM
-- Multiple PHP versions (5.6 - 8.5, 8.5 as default)
-- DNS Server (Bind) with clustering capabilities
-- POP/IMAP/SMTP mail services with Anti-Virus, Anti-Spam, and Webmail (ClamAV, SpamAssassin, Sieve, Roundcube)
-- MariaDB/MySQL and/or PostgreSQL databases
-- Let's Encrypt SSL support with wildcard certificates
-- Firewall with brute-force attack detection and IP lists (iptables, fail2ban, and ipset).
-
-## Supported platforms and operating systems
-
-- **Debian:** 13, 12, 11
-- **Ubuntu:** 26.04 LTS, 24.04 LTS, 22.04 LTS
-
-**NOTES:**
-
-- Hestia Control Panel does not support 32 bit operating systems!
-- Hestia Control Panel in combination with OpenVZ 7 or lower might have issues with DNS and/or firewall. If you use a Virtual Private Server we strongly advice you to use something based on KVM or LXC!
-
-## Installing Hestia Control Panel
-
-- **NOTE:** You must install Hestia Control Panel on top of a fresh operating system installation to ensure proper functionality.
-
-While we have taken every effort to make the installation process and the control panel interface as friendly as possible (even for new users), it is assumed that you will have some prior knowledge and understanding in the basics how to set up a Linux server before continuing.
-
-### Step 1: Log in
-
-To start the installation, you will need to be logged in as **root** or a user with super-user privileges. You can perform the installation either directly from the command line console or remotely via SSH:
+The native PHP template preview renders the actual login and footer templates
+with the default Ceasar configuration. Run it from the repository root on a
+machine with PHP:
 
 ```bash
-ssh root@your.server
+php -S 127.0.0.1:8099 -t . tools/branding-preview.php
 ```
 
-### Step 2: Download
+Open <http://127.0.0.1:8099/> for the default and
+<http://127.0.0.1:8099/?brand=iharc> for the `IHARC Labs Hosting` server-owned
+override. The preview is a QA fixture; it does not connect to a host, cloud
+provider, database, or authentication service.
 
-Download the installation script for the latest release:
+## Installation status
 
-```bash
-wget https://raw.githubusercontent.com/hestiacp/hestiacp/release/install/hst-install.sh
-```
+The `install/` scripts are retained for source-compatible host installation
+work. They are not a published Ceasar installer release. Any installation,
+remote update, or deployment requires a separately reviewed release decision.
 
-If the download fails due to an SSL validation error, please be sure you've installed the ca-certificate package on your system - you can do this with the following command:
+## Upstream notices and license
 
-```bash
-apt-get update && apt-get install ca-certificates
-```
-
-### Step 3: Run
-
-To begin the installation process, simply run the script and follow the on-screen prompts:
-
-```bash
-bash hst-install.sh
-```
-
-You will receive a welcome email at the address specified during installation (if applicable) and on-screen instructions after the installation is completed to log in and access your server.
-
-### Custom installation
-
-You may specify a number of various flags during installation to only install the features in which you need. To view a list of available options, run:
-
-```bash
-bash hst-install.sh -h
-```
-
-Alternatively, You can use <https://hestiacp.com/install.html> which allows you to easily generate the installation command via GUI.
-
-## How to upgrade an existing installation
-
-Automatic Updates are enabled by default on new installations of Hestia Control Panel and can be managed from **Server Settings > Updates**. To manually check for and install available updates, use the apt package manager:
-
-```bash
-apt-get update
-apt-get upgrade
-```
-
-## Issues & Support Requests
-
-- If you encounter a general problem while using Hestia Control Panel and need help, please [visit our forum](https://forum.hestiacp.com/) to search for potential solutions or post a new thread where community members can assist.
-- Bugs and other reproducible issues should be filed via GitHub by [creating a new issue report](https://github.com/hestiacp/hestiacp/issues) so that our developers can investigate further. Please note that requests for support will be redirected to our forum.
-
-**IMPORTANT: We _cannot_ provide support for requests that do not describe the troubleshooting steps that have already been performed, or for third-party applications not related to Hestia Control Panel (such as WordPress). Please make sure that you include as much information as possible in your forum posts or issue reports!**
-
-## Contributions
-
-If you would like to contribute to the project, please [read our Contribution Guidelines](https://github.com/hestiacp/hestiacp/blob/release/CONTRIBUTING.md) for a brief overview of our development process and standards.
-
-## Copyright
-
-"Hestia Control Panel", "HestiaCP", and the Hestia logo are original copyright of hestiacp.com and the following restrictions apply:
-
-**You are allowed to:**
-
-- use the names "Hestia Control Panel", "HestiaCP", or the Hestia logo in any context directly related to the application or the project. This includes the application itself, local communities and news or blog posts.
-
-**You are not allowed to:**
-
-- sell or redistribute the application under the name "Hestia Control Panel", "HestiaCP", or similar derivatives, including the use of the Hestia logo in any brand or marketing materials related to revenue generating activities,
-- use the names "Hestia Control Panel", "HestiaCP", or the Hestia logo in any context that is not related to the project,
-- alter the name "Hestia Control Panel", "HestiaCP", or the Hestia logo in any way.
-
-## License
-
-Hestia Control Panel is licensed under [GPL v3](https://github.com/hestiacp/hestiacp/blob/release/LICENSE) license, and is based on the [VestaCP](https://vestacp.com/) project.<br>
+Upstream attribution, copyright language, source provenance, and license
+information are recorded in [UPSTREAM_NOTICES.md](UPSTREAM_NOTICES.md). The
+upstream `LICENSE` file remains unchanged. IHARC maintainer ownership and the
+boundary with the separate Labs integration repository are documented in
+[IHARC_MAINTAINERS.md](IHARC_MAINTAINERS.md).

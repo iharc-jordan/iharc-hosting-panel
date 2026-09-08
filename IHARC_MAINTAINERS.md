@@ -29,10 +29,17 @@ hooks:
   variable.
 - An administrator can change the name, title, email sender, documentation
   visibility, and logo through the native **Server -> White Label** page or the
-  `v-change-sys-config-value` / `v-update-white-label-logo` commands.
+  `v-change-sys-config-value` / `v-update-white-label-logo` commands. The
+  `HIDE_DOCS` default is `yes`, because this checkout has no Ceasar support or
+  documentation service URL to substitute for the upstream destination.
 - Customer-facing templates read the configured `APP_NAME`; Hestia paths,
   command names, API identifiers, package names, and upstream legal notices
   remain stable for compatibility and attribution.
+- The retained installer currently fetches packages from the upstream
+  `apt.hestiacp.com` host and detects the public address through the upstream
+  `ip.hestiacp.com` endpoint. These are operational dependencies, not Ceasar
+  support links; migrating them requires a separately reviewed package service
+  and installer release.
 
 The checked-in logo files are the Ceasar default assets. Server owners can
 replace them through the existing `web/images/custom/` white-label flow.

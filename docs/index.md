@@ -2,45 +2,42 @@
 layout: home
 
 title: Ceasar Control Panel
-titleTemplate: Open-source web server control panel.
+titleTemplate: IHARC Labs maintained white-label checkout
 
 hero:
   name: Ceasar Control Panel
-  text: Open-source web server control panel
-  tagline: Fast, reliable, open-source. The control panel you’ve always wanted is just a command away.
+  text: IHARC Labs maintained white-label checkout
+  tagline: A source-pinned hosting control panel with server-owned branding.
   image:
     src: /logo.svg
     alt: Ceasar Control Panel
   actions:
     - theme: brand
-      text: Get started
+      text: Read the setup guide
       link: /docs/introduction/getting-started
     - theme: alt
-      text: Try the demo
-      link: https://demo.hestiacp.com:8083/
-    - theme: alt
-      text: View on GitHub
-      link: https://github.com/hestiacp/hestiacp
+      text: View the source
+      link: https://github.com/iharc-jordan/ceasar-control-panel
 
 features:
-  - icon: 🚀
-    title: Fast & easy to learn
-    details: Ceasar Control Panel is made with ease of use in mind. Creating a user or a website is as easy as clicking a button and filling out a couple of fields, while advanced features are easily accessible.
+  - icon: 📌
+    title: Pinned source baseline
+    details: This checkout records the upstream Hestia 1.10.4 tag and commit used as its maintenance baseline.
     link: /docs/introduction/getting-started
-    linkText: Documentation
-  - icon: ❤️
-    title: Made with love & pride
-    details: Ceasar Control Panel is open-source software that is built by passionate people from around the world. This means that the code is reviewed by multiple people and that anybody can contribute to it!
-    link: /team
-    linkText: See the team
-  - icon: 🛠️
-    title: Extendable & powerful
-    details: Ceasar Control Panel is extendable while being easy to learn. You can build your own themes, web templates, quick install applications and can interact with it using third party software via its API.
+    linkText: Read the guide
+  - icon: ⚙️
+    title: Server-owned branding
+    details: Administrators can set the application name, title, email sender, documentation visibility, and logo through the native White Label controls.
+    link: /docs/server-administration/configuration
+    linkText: Configuration
+  - icon: 🔧
+    title: Native compatibility
+    details: Hestia filesystem paths, command names, and APIs remain stable so source updates can be reviewed without an internal path rename.
+    link: /docs/reference/cli
+    linkText: CLI reference
+  - icon: 🧾
+    title: Explicit source notices
+    details: Upstream attribution and licensing are kept with the source baseline and maintainer records.
     link: /docs/contributing/development
-    linkText: Help develop Ceasar Control Panel
-  - icon: 🤝
-    title: Supported by the community
-    details: Ceasar Control Panel has a great support community - join the forum! To keep the project running, we rely on donations, which can be made via PayPal or cryptocurrency.
-    link: /donate
-    linkText: Donate
+    linkText: Development notes
 ---

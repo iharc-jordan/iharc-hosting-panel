@@ -5,11 +5,11 @@
 				<h2 class="u-text-center">Installation instructions</h2>
 				<p class="u-mb10">
 					Log in to your server e.g.
-					<code>ssh root@your.server</code> then download the installation script:
+					<code>ssh root@your.server</code> then use a reviewed source checkout:
 				</p>
 				<CopyToClipboardInput
 					class="u-mb10"
-					value="wget https://raw.githubusercontent.com/hestiacp/hestiacp/release/install/hst-install.sh"
+					value="git clone https://github.com/iharc-jordan/ceasar-control-panel.git ceasar-control-panel && cd ceasar-control-panel"
 				/>
 				<p class="u-mb10">
 					Check you are running as the <code>root</code> user, configure the options you want below,
