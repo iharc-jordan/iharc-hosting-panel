@@ -11,8 +11,8 @@ source, license, copyright notices, and history intact.
 - Baseline tag: `1.10.4`
 - Baseline commit: `733dd4453ae358b587d61b3f2faedf6e24c4db51`
 - Maintainer: `iharc-jordan`
-- Local state: the upstream remote is intentionally absent until the
-  release owner creates and configures the IHARC remote.
+- `origin` is the private IHARC repository; `upstream` points to the official
+  Hestia source for version and security updates.
 
 The baseline was selected from the IHARC Labs deployment and proof records.
 It is a source pin and inventory reference, not evidence that this checkout
@@ -74,6 +74,4 @@ maintainer patch, a host payload, or Labs integration code before moving it.
    authorized release or deployment. A passing local check is not a deployed
    revision or hosting-admission decision.
 
-For routine source comparison, use a temporary official fetch URL or a
-disposable clone. Do not add a permanent upstream remote to this checkout
-without an explicit maintainer decision.
+Fetch official releases through `upstream`; publish IHARC changes to `origin`.
