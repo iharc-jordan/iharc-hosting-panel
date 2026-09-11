@@ -84,6 +84,10 @@ if [ ! -e "$BACKUP/$backup" ]; then
 	if [[ "$BACKUP_SYSTEM" =~ "rclone" ]] && [ -z "$downloaded" ]; then
 		rclone_download "$backup"
 		downloaded='yes'
+		# This invocation owns the downloaded staging file, including on failure.
+		# The remote archive remains the native backup authority.
+		restore_download="$BACKUP/$backup"
+		trap 'rm -f -- "$restore_download"' EXIT
 	fi
 	if [ -z "$downloaded" ]; then
 		check_result "$E_NOTEXIST" "backup file $backup doesn't exist in '${BACKUP}' folder"
