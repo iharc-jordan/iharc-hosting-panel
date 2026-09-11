@@ -1,0 +1,9 @@
+# Native payloads must execute unchanged after a Windows checkout or archive.
+bin/* text eol=lf
+*.sh text eol=lf
+*.py text eol=lf
+*.patch text eol=lf
+*.service text eol=lf
+*.path text eol=lf
+*.tpl text eol=lf
+*.stpl text eol=lf

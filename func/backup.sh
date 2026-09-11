@@ -512,72 +512,63 @@ b2_delete() {
 }
 
 rclone_backup() {
-	# Define rclone config
+	# Keep the staging archive until the remote object is confirmed complete.
 	source_conf "$HESTIA/conf/rclone.backup.conf"
-	echo -e "$(date "+%F %T") Upload With Rclone to $HOST: $user.$backup_new_date.tar"
+	local archive="$user.$backup_new_date.tar" destination="$HOST:${BPATH%/}"
+	local listing remote_size local_size backups_rm_number old_backup
 	if [ "$localbackup" != 'yes' ]; then
-		cd $tmpdir
-		tar -cf $BACKUP/$user.$backup_new_date.tar .
+		(
+			umask 077
+			tar -cf "$BACKUP/$archive" -C "$tmpdir" .
+		)
+		check_result $? "Unable to create backup archive"
 	fi
-	cd $BACKUP/
-
-	if [ -z "$BPATH" ]; then
-		rclone copy -v $user.$backup_new_date.tar $HOST:$backup
-		if [ "$?" -ne 0 ]; then
-			check_result "$E_CONNECT" "Unable to upload backup"
-		fi
-
-		# Only include *.tar files
-		backup_list=$(rclone lsf $HOST: | cut -d' ' -f1 | grep -E "^${user}\.[0-9]{4}-.+\.tar$" | sort)
-		backups_count=$(echo "$backup_list" | wc -l)
-		backups_rm_number=$((backups_count - BACKUPS))
-		if [ "$backups_count" -ge "$BACKUPS" ]; then
-			for backup in $(echo "$backup_list" | head -n $backups_rm_number); do
-				echo "Delete file: $backup"
-				rclone deletefile $HOST:/$backup
-			done
-		fi
-	else
-		rclone copy -v $user.$backup_new_date.tar $HOST:$BPATH
-		if [ "$?" -ne 0 ]; then
-			check_result "$E_CONNECT" "Unable to upload backup"
-		fi
-
-		# Only include *.tar files
-		backup_list=$(rclone lsf $HOST:$BPATH | cut -d' ' -f1 | grep -E "^${user}\.[0-9]{4}-.+\.tar$" | sort)
-		backups_count=$(echo "$backup_list" | wc -l)
-		backups_rm_number=$(($backups_count - $BACKUPS))
-		if [ "$backups_count" -ge "$BACKUPS" ]; then
-			for backup in $(echo "$backup_list" | head -n $backups_rm_number); do
-				echo "Delete file: $backup"
-				rclone deletefile $HOST:$BPATH/$backup
-			done
-		fi
+	rclone copyto "$BACKUP/$archive" "$destination/$archive"
+	check_result $? "Unable to upload backup"
+	remote_size=$(rclone lsjson --stat "$destination/$archive")
+	check_result $? "Unable to verify uploaded backup"
+	remote_size=$(printf '%s' "$remote_size" | jq -er 'select(.IsDir == false) | .Size')
+	check_result $? "Invalid uploaded backup metadata"
+	local_size=$(stat -c %s "$BACKUP/$archive")
+	check_result $? "Unable to inspect backup archive"
+	[[ "$remote_size" == "$local_size" ]] || check_result "$E_CONNECT" "Uploaded backup size does not match"
+	listing=$(rclone lsf --files-only "$destination")
+	check_result $? "Unable to list remote backups"
+	backup_list=$(printf '%s\n' "$listing" | grep -E "^${user}\.[0-9]{4}-.+\.tar$" | sort)
+	backups_count=$(printf '%s\n' "$backup_list" | grep -c .)
+	backups_rm_number=$((backups_count - BACKUPS))
+	if [ "$backups_rm_number" -gt 0 ]; then
+		while IFS= read -r old_backup; do
+			rclone deletefile "$destination/$old_backup"
+			check_result $? "Unable to remove expired remote backup"
+		done < <(printf '%s\n' "$backup_list" | head -n "$backups_rm_number")
 	fi
 	if [ "$localbackup" != 'yes' ]; then
-		rm -f $user.$backup_new_date.tar
+		rm -f -- "$BACKUP/$archive"
+		check_result $? "Unable to remove uploaded staging archive"
 	fi
-
 }
 
 rclone_delete() {
 	# Defining rclone settings
 	source_conf "$HESTIA/conf/rclone.backup.conf"
-	if [ -z "$BPATH" ]; then
-		rclone deletefile $HOST:/$1
-	else
-		rclone deletefile $HOST:$BPATH/$1
-	fi
+	rclone deletefile "$HOST:${BPATH%/}/$1"
+	check_result $? "Unable to delete remote backup"
 }
 
 rclone_download() {
 
-	# Defining rclone b2 settings
+	# A failed download must not be presented to restore as a complete archive.
 	source_conf "$HESTIA/conf/rclone.backup.conf"
-	cd $BACKUP
-	if [ -z "$BPATH" ]; then
-		rclone copy -v $HOST:/$1 ./
-	else
-		rclone copy -v $HOST:$BPATH/$1 ./
+	local partial
+	partial=$(mktemp "$BACKUP/.restore.XXXXXX")
+	check_result $? "Unable to create restore staging file"
+	if ! rclone copyto "$HOST:${BPATH%/}/$1" "$partial"; then
+		rm -f -- "$partial"
+		check_result "$E_CONNECT" "Unable to download backup"
+	fi
+	if ! mv -- "$partial" "$BACKUP/$1"; then
+		rm -f -- "$partial"
+		check_result "$E_CONNECT" "Unable to publish downloaded backup"
 	fi
 }
