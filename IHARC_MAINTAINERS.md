@@ -101,3 +101,17 @@ maintainer patch, a host payload, or Labs integration code before moving it.
    revision or hosting-admission decision.
 
 Fetch official releases through `upstream`; publish IHARC changes to `origin`.
+
+## Current portal integration profile
+
+`install/common/api/iharc-control` records the native command profile used by
+IHARC Labs self-service hosting. It includes website inventory and domain
+renaming for the portal's website list and domain connection workflow. Creating
+an access key with this profile is a separate host operation; the file contains
+no credentials and does not enable the API or grant a key by itself.
+
+The `v-iharc-*` commands require the reviewed Labs host payload. The release
+owner stages the identical profile from Labs `infra/common/hestia-api/iharc-control`
+when deploying that payload. Authentication, billing, workers, transfer policy,
+and the native isolation service remain owned by Labs. The current integration
+is tracked in [Labs PR 15](https://github.com/iharc-jordan/iharc-labs/pull/15).
