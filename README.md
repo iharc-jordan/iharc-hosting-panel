@@ -5,10 +5,6 @@ hosting control panel. It preserves the upstream Hestia Control Panel source,
 filesystem layout, commands, and APIs so that upstream security and maintenance
 work can be reviewed against a pinned source baseline.
 
-This repository is a maintained source checkout and customization boundary. It
-does not claim a published Ceasar release, a hosted deployment, a public demo,
-a support forum, or a donation program.
-
 ## Source status
 
 - Upstream project: <https://github.com/hestiacp/hestiacp.git>
@@ -16,8 +12,6 @@ a support forum, or a donation program.
 - Baseline commit: `733dd4453ae358b587d61b3f2faedf6e24c4db51`
 - Current checkout: native white-label changes are kept in separate IHARC
   commits on top of that source baseline.
-- The repository is not evidence that a panel has been installed, deployed, or
-  accepted for production.
 
 ## Server-owned branding
 
@@ -50,16 +44,17 @@ Open <http://127.0.0.1:8099/> for the default and
 override. The preview is a QA fixture; it does not connect to a host, cloud
 provider, database, or authentication service.
 
-## Installation status
+## Hosting integration
 
-The `install/` scripts are retained for source-compatible host installation
-work. They are not a published Ceasar installer release. Any installation,
-remote update, or deployment requires a separately reviewed release decision.
+IHARC Labs pins this repository at `vendor/ceasar`. Its
+`infra/common/bootstrap-hestia.sh` and `infra/common/install-hosting-payload.sh`
+install the native panel and host controls. The portal, authentication,
+database, billing, background workers, and Azure deployment code live in the
+Labs repository. `install/common/api/iharc-control` contains the native API
+command profile used by that integration.
 
 ## Upstream notices and license
 
 Upstream attribution, copyright language, source provenance, and license
 information are recorded in [UPSTREAM_NOTICES.md](UPSTREAM_NOTICES.md). The
-upstream `LICENSE` file remains unchanged. IHARC maintainer ownership and the
-boundary with the separate Labs integration repository are documented in
-[IHARC_MAINTAINERS.md](IHARC_MAINTAINERS.md).
+upstream `LICENSE` file remains unchanged.
